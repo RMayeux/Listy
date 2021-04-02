@@ -13,6 +13,7 @@ script:
 jobs:
   include:
     - stage: deploy
+      if: branch = develop
       node_js: lts/*
       script:
         - rm -rf node_modules && yarn install --frozen-lockfile
