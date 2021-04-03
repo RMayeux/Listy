@@ -1,9 +1,5 @@
 // Screens
-import {
-  createAppContainer,
-  createSwitchNavigator,
-  createBottomTabNavigator,
-} from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 // React Navigation Setup
 
