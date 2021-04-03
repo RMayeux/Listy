@@ -1,4 +1,5 @@
 import * as Google from 'expo-google-app-auth';
+import { IOS_CLIENT_ID, ANDROID_CLIENT_ID } from 'react-native-dotenv';
 import { getStringData } from '../../asyncStorage';
 
 interface Props {
