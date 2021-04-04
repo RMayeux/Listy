@@ -30,21 +30,21 @@ export const LINE_HEIGHT_16 = scaleFont(16);
 // FONT STYLE
 export const FONT_LIGHT = {
   fontFamily: FONT_FAMILY_LIGHT,
-  fontWeight: FONT_WEIGHT_LIGHT,
+  fontWeight: FONT_WEIGHT_LIGHT as '300',
 };
 export const FONT_REGULAR = {
   fontFamily: FONT_FAMILY_REGULAR,
-  fontWeight: FONT_WEIGHT_REGULAR,
+  fontWeight: FONT_WEIGHT_REGULAR as '400',
 };
 export const FONT_MEDIUM = {
   fontFamily: FONT_FAMILY_MEDIUM,
-  fontWeight: FONT_WEIGHT_MEDIUM,
+  fontWeight: FONT_WEIGHT_MEDIUM as '500',
 };
 export const FONT_SEMI_BOLD = {
   fontFamily: FONT_FAMILY_SEMI_BOLD,
-  fontWeight: FONT_WEIGHT_SEMI_BOLD,
+  fontWeight: FONT_WEIGHT_SEMI_BOLD as '600',
 };
 export const FONT_BOLD = {
   fontFamily: FONT_FAMILY_BOLD,
-  fontWeight: FONT_WEIGHT_BOLD,
+  fontWeight: FONT_WEIGHT_BOLD as '700',
 };
