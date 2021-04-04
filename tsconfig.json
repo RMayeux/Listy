@@ -7,6 +7,19 @@
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "strict": true
+    "strict": true,
+    "baseUrl": "./src/",
+    "paths": {
+      "_styles": ["styles"],
+      "_assets": ["assets"],
+      "_components": ["components"],
+      "_atoms": ["components/atoms"],
+      "_molecules": ["components/molecules"],
+      "_organisms": ["components/organisms"],
+      "_navigations": ["navigations"],
+      "_scenes": ["scenes"],
+      "_services": ["services"],
+      "_utils": ["utils"],
+    }
   }
 }
