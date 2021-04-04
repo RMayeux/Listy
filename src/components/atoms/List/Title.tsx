@@ -5,7 +5,7 @@ import { Typography, Colors } from '_styles';
 const { FONT_SIZE_18, FONT_SEMI_BOLD } = Typography;
 const { PRIMARY } = Colors;
 
-interface ListContainerTitleInterface {
+interface ListTitleInterface {
   title: string;
 }
 
@@ -17,10 +17,8 @@ const styles = StyleSheet.create({
   },
 });
 
-function ListContainerTitle({
-  title,
-}: ListContainerTitleInterface): JSX.Element {
+function ListTitle({ title }: ListTitleInterface): JSX.Element {
   return <Text style={styles.title}>{title}</Text>;
 }
 
-export default ListContainerTitle;
+export default ListTitle;

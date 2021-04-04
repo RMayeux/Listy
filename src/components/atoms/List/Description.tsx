@@ -5,7 +5,7 @@ import { Typography, Colors } from '_styles';
 const { FONT_SIZE_14, FONT_LIGHT } = Typography;
 const { BLACK_60 } = Colors;
 
-interface ListContainerDescriptionInterface {
+interface ListDescriptionInterface {
   description: string;
 }
 
@@ -17,10 +17,10 @@ const styles = StyleSheet.create({
   },
 });
 
-function ListContainerDescription({
+function ListDescription({
   description,
-}: ListContainerDescriptionInterface): JSX.Element {
+}: ListDescriptionInterface): JSX.Element {
   return <Text style={styles.description}>{description}</Text>;
 }
 
-export default ListContainerDescription;
+export default ListDescription;
