@@ -34,8 +34,14 @@ export default function HomeScreen({
 
   return (
     <View style={styles.container}>
-      <Header title="Listes" />
-      <ListContainer lists={lists} />
+      {!isLoading ? (
+        <>
+          <Header title="Listes" />
+          <ListContainer lists={lists} />
+        </>
+      ) : (
+        <></>
+      )}
     </View>
   );
 }

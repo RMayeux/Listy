@@ -1,6 +1,7 @@
+/* eslint-disable react/no-unused-prop-types */
 import { List } from '_molecules';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { Colors } from '_styles';
 
 interface ListInterface {
@@ -13,6 +14,10 @@ interface ListContainerInterface {
   lists: ListInterface[];
 }
 
+interface renderDataInterface {
+  item: ListInterface;
+}
+
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
@@ -23,19 +28,21 @@ const styles = StyleSheet.create({
 });
 
 function ListContainer({ lists }: ListContainerInterface): JSX.Element {
-  const listViews: JSX.Element[] = [];
-
-  lists.forEach((list: ListInterface) => {
-    listViews.push(
-      <List
-        description={list.description}
-        name={list.name}
-        style={{ marginBottom: 15 }}
-      />,
-    );
-  });
-
-  return <View style={styles.listContainer}>{listViews}</View>;
+  return (
+    <View style={styles.listContainer}>
+      <FlatList
+        contentContainerStyle={{ flex: 1, alignItems: 'center' }}
+        data={lists}
+        renderItem={({ item }: renderDataInterface) => (
+          <List
+            name={item.name}
+            description={item.description}
+            style={{ marginBottom: 15 }}
+          />
+        )}
+      />
+    </View>
+  );
 }
 
 export default ListContainer;

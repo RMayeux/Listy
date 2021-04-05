@@ -1,7 +1,8 @@
 import { ListDescription, ListName } from '_atoms';
 import React from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, View, ViewStyle, Text } from 'react-native';
 import { Colors } from '_styles';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 interface ListInterface {
   name: string;
@@ -11,7 +12,7 @@ interface ListInterface {
 const styles = StyleSheet.create({
   list: {
     padding: 10,
-    width: '90%',
+    width: '95%',
     borderRadius: 10,
     backgroundColor: Colors.WHITE,
     shadowColor: '#000',
@@ -25,12 +26,25 @@ const styles = StyleSheet.create({
   },
 });
 
+function LeftActions() {
+  return (
+    <View>
+      <Text>Add to cart</Text>
+    </View>
+  );
+}
+
 function List({ name, description, style }: ListInterface): JSX.Element {
   return (
-    <View style={[styles.list, style]}>
-      <ListName name={name} style={{ marginBottom: 10 }} />
-      <ListDescription description={description} />
-    </View>
+    <Swipeable
+      containerStyle={{ flex: 1, alignItems: 'center' }}
+      renderLeftActions={LeftActions}
+    >
+      <View style={[styles.list, style]}>
+        <ListName name={name} style={{ marginBottom: 10 }} />
+        <ListDescription description={description} />
+      </View>
+    </Swipeable>
   );
 }
 
