@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, StyleSheet, ViewStyle } from 'react-native';
 import { Typography, Colors } from '_styles';
 
-const { FONT_SIZE_16, FONT_SEMI_BOLD } = Typography;
+const { FONT_SIZE_20, FONT_SEMI_MEDIUM } = Typography;
 const { PRIMARY } = Colors;
 
 interface ListTitleInterface {
@@ -12,9 +12,9 @@ interface ListTitleInterface {
 
 const styles = StyleSheet.create({
   name: {
-    fontSize: FONT_SIZE_16,
+    fontSize: FONT_SIZE_20,
     color: PRIMARY,
-    ...FONT_SEMI_BOLD,
+    ...FONT_SEMI_MEDIUM,
   },
 });
 
