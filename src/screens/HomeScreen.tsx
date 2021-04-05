@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import { Typography } from '_styles';
 import { Header } from '_molecules';
 import { StackScreenProps } from '@react-navigation/stack';
+import { ListContainer } from '_organisms';
 import { searchList, listInterface } from '../services/list/searchList';
 import { RootStackParamList } from '../../types';
 
@@ -31,16 +32,10 @@ export default function HomeScreen({
     })();
   }, []);
 
-  const listsComponent: JSX.Element[] = [];
-
-  lists.forEach((list: listInterface) =>
-    listsComponent.push(<Text>{list.name}</Text>),
-  );
-
   return (
     <View style={styles.container}>
       <Header title="Listes" />
-      {listsComponent}
+      <ListContainer lists={lists} />
     </View>
   );
 }

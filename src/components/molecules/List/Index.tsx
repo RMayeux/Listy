@@ -1,26 +1,34 @@
-import { ListDescription, ListTitle } from '_atoms';
+import { ListDescription, ListName } from '_atoms';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ViewStyle } from 'react-native';
 import { Colors } from '_styles';
 
-const { PRIMARY } = Colors;
-
 interface ListInterface {
-  title: string;
+  name: string;
   description: string;
+  style: ViewStyle;
 }
 const styles = StyleSheet.create({
   list: {
-    borderColor: PRIMARY,
-    borderWidth: 2,
-    padding: 5,
+    padding: 10,
+    width: '90%',
+    borderRadius: 10,
+    backgroundColor: Colors.WHITE,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+    elevation: 3,
   },
 });
 
-function List({ title, description }: ListInterface): JSX.Element {
+function List({ name, description, style }: ListInterface): JSX.Element {
   return (
-    <View style={styles.list}>
-      <ListTitle title={title} />
+    <View style={[styles.list, style]}>
+      <ListName name={name} style={{ marginBottom: 10 }} />
       <ListDescription description={description} />
     </View>
   );

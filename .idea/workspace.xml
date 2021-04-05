@@ -3,9 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="738350ec-81ea-4d28-b0cc-2881f951778f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/atoms/List/Description.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/List/Description.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/atoms/List/Title.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/atoms/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/Header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/Header/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/List/Index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/List/Index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/colors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/colors.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,14 +51,14 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="360" y="120" width="1200" height="800" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1617531541494">
+    <state x="360" y="120" width="1200" height="800" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1617629405465">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="360" y="120" width="1200" height="800" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617531541494" />
-    <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1617531530055">
+    <state x="360" y="120" width="1200" height="800" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617629405465" />
+    <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1617627199160">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617531530055" />
+    <state x="656" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617627199160" />
     <state x="616" y="242" key="run.anything.popup" timestamp="1617531533923">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
