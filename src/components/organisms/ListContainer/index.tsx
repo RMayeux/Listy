@@ -1,17 +1,18 @@
 /* eslint-disable react/no-unused-prop-types */
 import { List } from '_molecules';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Colors } from '_styles';
+import deleteList from 'services/list/deleteList';
 
 interface ListInterface {
   name: string;
-  description: string;
   id: string;
 }
 
 interface ListContainerInterface {
   lists: ListInterface[];
+  setLists: (lists: ListInterface[]) => void;
 }
 
 interface renderDataInterface {
@@ -27,7 +28,10 @@ const styles = StyleSheet.create({
   },
 });
 
-function ListContainer({ lists }: ListContainerInterface): JSX.Element {
+function ListContainer({
+  lists,
+  setLists,
+}: ListContainerInterface): JSX.Element {
   return (
     <View style={styles.listContainer}>
       <FlatList
@@ -36,8 +40,13 @@ function ListContainer({ lists }: ListContainerInterface): JSX.Element {
         renderItem={({ item }: renderDataInterface) => (
           <List
             name={item.name}
-            description={item.description}
             style={{ marginBottom: 15 }}
+            onSwipe={async () => {
+              await deleteList(`/lists/${item.id}`);
+              const newLists = [...lists];
+              newLists.splice(newLists.indexOf(item), 1);
+              setLists(newLists);
+            }}
           />
         )}
       />
