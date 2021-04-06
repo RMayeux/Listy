@@ -53,3 +53,16 @@ export const update = async (
   });
   return response;
 };
+
+export const deleteItem = async (route: string): Promise<unknown> => {
+  const headers = {
+    'Content-Type': 'application/json',
+    // "x-api-key": "d41d8cd98f00b204e9800998ecf8427e",
+    // "user-account-id": await getStringData("userId"),
+  };
+  const response = await fetch(`${API_URL}/${route}`, {
+    method: 'DELETE',
+    headers,
+  });
+  return response;
+};
