@@ -13,7 +13,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Typography } from '_styles';
 
-const HEIGHT = 45;
+const HEIGHT = 55;
 const styles = StyleSheet.create({
   remove: {
     color: 'white',
