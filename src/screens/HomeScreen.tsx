@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Typography } from '_styles';
 import { Header } from '_molecules';
 import { StackScreenProps } from '@react-navigation/stack';
 import { ListContainer } from '_organisms';
-import { searchList, listInterface } from '../services/list/searchList';
+import searchList, { ListInterface } from '../services/list/searchList';
 import { RootStackParamList } from '../../types';
 
 const styles = StyleSheet.create({
@@ -22,7 +22,7 @@ export default function HomeScreen({
   navigation,
   route,
 }: StackScreenProps<RootStackParamList, 'Home'>): JSX.Element {
-  const [lists, setLists] = useState<listInterface[]>([]);
+  const [lists, setLists] = useState<ListInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function HomeScreen({
       {!isLoading ? (
         <>
           <Header title="Listes" />
-          <ListContainer lists={lists} />
+          <ListContainer lists={lists} setLists={setLists} />
         </>
       ) : (
         <></>
