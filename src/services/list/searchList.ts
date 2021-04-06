@@ -6,7 +6,7 @@ export interface ListInterface {
   description: string;
 }
 
-export async function searchList(): Promise<ListInterface[]> {
+export default async function searchList(): Promise<ListInterface[]> {
   const lists = await get('/lists');
   return lists;
 }
