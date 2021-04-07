@@ -4,7 +4,7 @@ import { Typography } from '_styles';
 import { Header } from '_molecules';
 import { StackScreenProps } from '@react-navigation/stack';
 import { ListContainer } from '_organisms';
-import searchList, { ListInterface } from '../services/list/searchList';
+import { searchList } from '_services';
 import { RootStackParamList } from '../../types';
 
 const styles = StyleSheet.create({
@@ -18,12 +18,19 @@ const styles = StyleSheet.create({
   },
 });
 
+export interface ListInterface {
+  id: string;
+  name: string;
+}
+
 export default function HomeScreen({
   navigation,
   route,
 }: StackScreenProps<RootStackParamList, 'Home'>): JSX.Element {
   const [lists, setLists] = useState<ListInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isEnabled, setIsEnabled] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>('Mes listes');
 
   useEffect(() => {
     (async () => {
@@ -32,12 +39,25 @@ export default function HomeScreen({
     })();
   }, []);
 
+  const onPressSwitch = () => {
+    setIsEnabled(!isEnabled);
+    if (isEnabled) {
+      setTitle('Mes listes');
+    } else {
+      setTitle('Liste partagées');
+    }
+  };
+
   return (
     <View style={styles.container}>
       {!isLoading ? (
         <>
-          <Header title="Listes" />
-          <ListContainer lists={lists} setLists={setLists} />
+          <Header title={title} />
+          <ListContainer
+            lists={lists}
+            setLists={setLists}
+            onPressSwitch={onPressSwitch}
+          />
         </>
       ) : (
         <></>

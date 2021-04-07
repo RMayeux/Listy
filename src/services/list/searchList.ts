@@ -3,7 +3,6 @@ import { get } from '../../libs/api';
 export interface ListInterface {
   id: string;
   name: string;
-  description: string;
 }
 
 export default async function searchList(): Promise<ListInterface[]> {
