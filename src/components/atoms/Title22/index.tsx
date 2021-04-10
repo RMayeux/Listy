@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
   },
 });
 
-function HeaderTitle({ title }: HeaderTitleInterface): JSX.Element {
+function Title22({ title }: HeaderTitleInterface): JSX.Element {
   return <Text style={styles.title}>{title}</Text>;
 }
 
-export default HeaderTitle;
+export default Title22;

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Typography } from '_styles';
-import { Header } from '_molecules';
+import { Typography, Colors } from '_styles';
+import { Header, NewListButton } from '_molecules';
 import { StackScreenProps } from '@react-navigation/stack';
 import { ListContainer } from '_organisms';
-import { searchList } from '_services';
+import { searchList, searchSharingRequest } from '_services';
 import { RootStackParamList } from '../../types';
 
 const styles = StyleSheet.create({
@@ -21,22 +21,33 @@ const styles = StyleSheet.create({
 export interface ListInterface {
   id: string;
   name: string;
+  owner: OwnerInterface;
+  listId?: string;
+}
+interface OwnerInterface {
+  id: string;
+  firstName: string;
+  lastName: string;
 }
 
 export default function HomeScreen({
   navigation,
   route,
 }: StackScreenProps<RootStackParamList, 'Home'>): JSX.Element {
-  const [lists, setLists] = useState<ListInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isEnabled, setIsEnabled] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('Mes listes');
+  const [myLists, setMyLists] = useState<ListInterface[]>([]);
+  const [sharedLists, setSharedLists] = useState<ListInterface[]>([]);
+
+  const ownerId = '1234id';
 
   useEffect(() => {
-    (async () => {
-      setLists(await searchList());
+    searchList().then(results => {
+      setSharedLists(results.filter(list => ownerId !== list.owner.id));
+      setMyLists(results.filter(list => ownerId === list.owner.id));
       setIsLoading(false);
-    })();
+    });
   }, []);
 
   const onPressSwitch = () => {
@@ -54,9 +65,14 @@ export default function HomeScreen({
         <>
           <Header title={title} />
           <ListContainer
-            lists={lists}
-            setLists={setLists}
+            lists={isEnabled ? [...sharedLists] : myLists}
+            setLists={isEnabled ? setSharedLists : setMyLists}
             onPressSwitch={onPressSwitch}
+            isEnabled={isEnabled}
+          />
+          <NewListButton
+            style={{ color: Colors.WHITE }}
+            title="Créer une liste"
           />
         </>
       ) : (

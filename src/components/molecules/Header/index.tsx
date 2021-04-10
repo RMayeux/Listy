@@ -1,4 +1,4 @@
-import { HeaderTitle } from '_atoms';
+import { Title22 } from '_atoms';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '_styles';
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 function Header({ title }: HeaderInterface): JSX.Element {
   return (
     <View style={styles.header}>
-      <HeaderTitle title={title} />
+      <Title22 title={title} />
     </View>
   );
 }

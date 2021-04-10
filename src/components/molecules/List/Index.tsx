@@ -2,6 +2,7 @@ import { ListName, ListAction } from '_atoms';
 import React from 'react';
 import { StyleSheet, View, ViewStyle, Dimensions } from 'react-native';
 import { Colors } from '_styles';
+
 import Animated, {
   abs,
   add,
@@ -31,10 +32,23 @@ import {
 const { width } = Dimensions.get('window');
 const snapPoints = [-width, -100, 0];
 const HEIGHT = 55;
-interface ListInterface {
-  name: string;
+interface ListComponentInterface {
+  list: ListInterface;
   style: ViewStyle;
   onSwipe: (args: readonly never[]) => void;
+  isEnabled: boolean;
+}
+export interface ListInterface {
+  id: string;
+  name: string;
+  owner: OwnerInterface;
+  listId?: string;
+}
+
+interface OwnerInterface {
+  id: string;
+  firstName: string;
+  lastName: string;
 }
 
 const styles = StyleSheet.create({
@@ -50,7 +64,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
     elevation: 3,
-    height: HEIGHT,
+    height: 55,
+    position: 'relative',
   },
   background: {
     ...StyleSheet.absoluteFillObject,
@@ -63,7 +78,12 @@ const styles = StyleSheet.create({
   },
 });
 
-function List({ name, onSwipe, style }: ListInterface): JSX.Element {
+function List({
+  list,
+  onSwipe,
+  style,
+  isEnabled,
+}: ListComponentInterface): JSX.Element {
   const {
     gestureHandler,
     translation,
@@ -109,9 +129,12 @@ function List({ name, onSwipe, style }: ListInterface): JSX.Element {
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <PanGestureHandler {...gestureHandler}>
         <Animated.View style={{ height, transform: [{ translateX }] }}>
-          <View style={[styles.list, style]}>
-            <ListName name={name} style={{ marginBottom: 10 }} />
-          </View>
+          <TouchableWithoutFeedback
+            onPress={() => alert('XD')}
+            style={[styles.list, style]}
+          >
+            <ListName name={list.name} style={{ marginBottom: 10 }} />
+          </TouchableWithoutFeedback>
         </Animated.View>
       </PanGestureHandler>
     </View>

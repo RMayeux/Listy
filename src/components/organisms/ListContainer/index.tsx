@@ -4,15 +4,13 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Colors } from '_styles';
 import { deleteList } from '_services';
+import { ListInterface } from 'screens/HomeScreen';
 
-interface ListInterface {
-  name: string;
-  id: string;
-}
 interface ListContainerInterface {
   lists: ListInterface[];
   setLists: Dispatch<SetStateAction<ListInterface[]>>;
   onPressSwitch: () => void;
+  isEnabled: boolean;
 }
 interface renderDataInterface {
   item: ListInterface;
@@ -30,6 +28,7 @@ function ListContainer({
   lists,
   setLists,
   onPressSwitch,
+  isEnabled,
 }: ListContainerInterface): JSX.Element {
   return (
     <View style={styles.listContainer}>
@@ -39,14 +38,15 @@ function ListContainer({
         data={lists}
         renderItem={({ item }: renderDataInterface) => (
           <List
-            name={item.name}
-            style={{ marginBottom: 15 }}
+            list={item}
+            style={{}}
             onSwipe={async () => {
               await deleteList();
               const newLists = [...lists];
               newLists.splice(newLists.indexOf(item), 1);
               setLists(newLists);
             }}
+            isEnabled={isEnabled}
           />
         )}
       />
