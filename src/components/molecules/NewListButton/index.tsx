@@ -1,12 +1,12 @@
 import { Title20 } from '_atoms';
 import React from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, View, TextStyle } from 'react-native';
 import { Colors } from '_styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface NewListButtonInterface {
   title: string;
-  style: ViewStyle;
+  style: TextStyle;
 }
 const styles = StyleSheet.create({
   button: {

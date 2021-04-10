@@ -4,7 +4,7 @@ import { Typography, Colors } from '_styles';
 import { Header, NewListButton } from '_molecules';
 import { StackScreenProps } from '@react-navigation/stack';
 import { ListContainer } from '_organisms';
-import { searchList, searchSharingRequest } from '_services';
+import { searchList } from '_services';
 import { RootStackParamList } from '../../types';
 
 const styles = StyleSheet.create({
@@ -43,7 +43,7 @@ export default function HomeScreen({
   const ownerId = '1234id';
 
   useEffect(() => {
-    searchList().then(results => {
+    searchList().then((results: ListInterface[]) => {
       setSharedLists(results.filter(list => ownerId !== list.owner.id));
       setMyLists(results.filter(list => ownerId === list.owner.id));
       setIsLoading(false);

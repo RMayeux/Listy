@@ -1,13 +1,12 @@
 import React from 'react';
-import { Text, StyleSheet, ViewStyle } from 'react-native';
-import { Typography, Colors } from '_styles';
+import { Text, StyleSheet, TextStyle } from 'react-native';
+import { Typography } from '_styles';
 
 const { FONT_SIZE_20, FONT_MEDIUM } = Typography;
-const { BLACK_60 } = Colors;
 
 interface Title20Interface {
   title: string;
-  style: ViewStyle;
+  style: TextStyle;
 }
 
 const styles = StyleSheet.create({

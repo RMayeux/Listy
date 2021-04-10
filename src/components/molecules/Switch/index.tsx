@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Typography, Colors } from '_styles';
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { Colors } from '_styles';
 import SwitchSelector from 'react-native-switch-selector';
 
 interface ListSwitchInterface {

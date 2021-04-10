@@ -78,12 +78,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function List({
-  list,
-  onSwipe,
-  style,
-  isEnabled,
-}: ListComponentInterface): JSX.Element {
+function List({ list, onSwipe, style }: ListComponentInterface): JSX.Element {
   const {
     gestureHandler,
     translation,
@@ -129,10 +124,7 @@ function List({
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <PanGestureHandler {...gestureHandler}>
         <Animated.View style={{ height, transform: [{ translateX }] }}>
-          <TouchableWithoutFeedback
-            onPress={() => alert('XD')}
-            style={[styles.list, style]}
-          >
+          <TouchableWithoutFeedback style={[styles.list, style]}>
             <ListName name={list.name} style={{ marginBottom: 10 }} />
           </TouchableWithoutFeedback>
         </Animated.View>
