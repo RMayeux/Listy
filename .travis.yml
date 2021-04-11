@@ -13,10 +13,11 @@ script:
 jobs:
   include:
     - stage: deploy
-      if: branch = develop
+      if: branch = main
       node_js: lts/*
       script:
         - rm -rf node_modules && yarn install --frozen-lockfile
+        - echo IOS_CLIENT_ID=$IOS_CLIENT_ID ANDROID_CLIENT_ID=$ANDROID_CLIENT_ID API_URL=$API_URL >> env.yml
         - npm install --global expo-cli
         - npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
         - npx expo publish --non-interactive
