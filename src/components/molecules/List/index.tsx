@@ -1,8 +1,13 @@
 import { ListName, ListAction } from '_atoms';
-import React from 'react';
-import { StyleSheet, View, ViewStyle, Dimensions } from 'react-native';
-import { Colors } from '_styles';
-
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  View,
+  ViewStyle,
+  Dimensions,
+  TextInput,
+} from 'react-native';
+import { Colors, Typography } from '_styles';
 import Animated, {
   abs,
   add,
@@ -29,6 +34,9 @@ import {
   minus,
 } from 'react-native-redash';
 
+const { FONT_SIZE_20, FONT_MEDIUM } = Typography;
+const { BLACK_60 } = Colors;
+
 const { width } = Dimensions.get('window');
 const snapPoints = [-width, -100, 0];
 const HEIGHT = 55;
@@ -36,6 +44,7 @@ interface ListComponentInterface {
   list: ListInterface;
   style: ViewStyle;
   onSwipe: (args: readonly never[]) => void;
+  onEnter: (string: string) => void;
   isEnabled: boolean;
 }
 export interface ListInterface {
@@ -54,6 +63,7 @@ interface OwnerInterface {
 const styles = StyleSheet.create({
   list: {
     padding: 10,
+    paddingBottom: 0,
     minWidth: '100%',
     backgroundColor: Colors.WHITE,
     shadowColor: '#000',
@@ -66,6 +76,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     height: 55,
     position: 'relative',
+    justifyContent: 'center',
   },
   background: {
     ...StyleSheet.absoluteFillObject,
@@ -78,7 +89,13 @@ const styles = StyleSheet.create({
   },
 });
 
-function List({ list, onSwipe, style }: ListComponentInterface): JSX.Element {
+function List({
+  list,
+  onSwipe,
+  style,
+  onEnter,
+}: ListComponentInterface): JSX.Element {
+  const [name, setName] = useState<string>('');
   const {
     gestureHandler,
     translation,
@@ -125,7 +142,25 @@ function List({ list, onSwipe, style }: ListComponentInterface): JSX.Element {
       <PanGestureHandler {...gestureHandler}>
         <Animated.View style={{ height, transform: [{ translateX }] }}>
           <TouchableWithoutFeedback style={[styles.list, style]}>
-            <ListName name={list.name} style={{ marginBottom: 10 }} />
+            {list.name ? (
+              <ListName name={list.name} style={{ marginBottom: 10 }} />
+            ) : (
+              <TextInput
+                onChangeText={text => setName(text)}
+                onBlur={() => {
+                  onEnter(name);
+                }}
+                style={{
+                  fontSize: FONT_SIZE_20,
+                  color: BLACK_60,
+                  ...FONT_MEDIUM,
+                  paddingBottom: 2,
+                  borderBottomWidth: 1,
+                  borderBottomColor: Colors.PRIMARY,
+                  width: '50%',
+                }}
+              />
+            )}
           </TouchableWithoutFeedback>
         </Animated.View>
       </PanGestureHandler>

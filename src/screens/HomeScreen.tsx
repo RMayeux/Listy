@@ -5,6 +5,7 @@ import { Header, NewListButton } from '_molecules';
 import { StackScreenProps } from '@react-navigation/stack';
 import { ListContainer } from '_organisms';
 import { searchList } from '_services';
+import uuid from 'react-native-uuid';
 import { RootStackParamList } from '../../types';
 
 const styles = StyleSheet.create({
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
 
 export interface ListInterface {
   id: string;
-  name: string;
+  namew: string;
   owner: OwnerInterface;
   listId?: string;
 }
@@ -41,6 +42,8 @@ export default function HomeScreen({
   const [sharedLists, setSharedLists] = useState<ListInterface[]>([]);
 
   const ownerId = '1234id';
+  const ownerFirstName = 'Rémi';
+  const ownerLastName = 'Mayeux';
 
   useEffect(() => {
     searchList().then((results: ListInterface[]) => {
@@ -59,6 +62,22 @@ export default function HomeScreen({
     }
   };
 
+  const onPressCreateList = () => {
+    setIsEnabled(false);
+    setMyLists([
+      {
+        id: `${uuid.v4()}`,
+        name: '',
+        owner: {
+          firstName: ownerFirstName,
+          id: ownerId,
+          lastName: ownerLastName,
+        },
+      },
+      ...myLists,
+    ]);
+  };
+
   return (
     <View style={styles.container}>
       {!isLoading ? (
@@ -73,6 +92,7 @@ export default function HomeScreen({
           <NewListButton
             style={{ color: Colors.WHITE }}
             title="Créer une liste"
+            onPressCreateList={onPressCreateList}
           />
         </>
       ) : (

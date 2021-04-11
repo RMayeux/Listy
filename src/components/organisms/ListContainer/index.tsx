@@ -3,7 +3,7 @@ import { List, ListSwitch } from '_molecules';
 import React, { Dispatch, SetStateAction } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Colors } from '_styles';
-import { deleteList } from '_services';
+import { createList, deleteList } from '_services';
 import { ListInterface } from 'screens/HomeScreen';
 
 interface ListContainerInterface {
@@ -41,10 +41,24 @@ function ListContainer({
             list={item}
             style={{}}
             onSwipe={async () => {
-              await deleteList();
+              if (item.name) {
+                await deleteList(item.id);
+              }
               const newLists = [...lists];
               newLists.splice(newLists.indexOf(item), 1);
               setLists(newLists);
+            }}
+            onEnter={async (name: string) => {
+              if (name) {
+                const newLists = [...lists];
+                newLists[newLists.indexOf(item)].name = name;
+                await createList(newLists[newLists.indexOf(item)]);
+                setLists(newLists);
+              } else {
+                const newLists = [...lists];
+                newLists.splice(newLists.indexOf(item), 1);
+                setLists(newLists);
+              }
             }}
             isEnabled={isEnabled}
           />
