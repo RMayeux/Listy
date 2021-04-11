@@ -3,7 +3,7 @@ import { Text, StyleSheet, ViewStyle } from 'react-native';
 import { Typography, Colors } from '_styles';
 
 const { FONT_SIZE_20, FONT_SEMI_MEDIUM } = Typography;
-const { PRIMARY } = Colors;
+const { BLACK_60 } = Colors;
 
 interface ListTitleInterface {
   name: string;
@@ -13,7 +13,7 @@ interface ListTitleInterface {
 const styles = StyleSheet.create({
   name: {
     fontSize: FONT_SIZE_20,
-    color: PRIMARY,
+    color: BLACK_60,
     ...FONT_SEMI_MEDIUM,
   },
 });
