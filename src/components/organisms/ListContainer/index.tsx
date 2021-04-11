@@ -10,6 +10,7 @@ interface ListContainerInterface {
   lists: ListInterface[];
   setLists: Dispatch<SetStateAction<ListInterface[]>>;
   onPressSwitch: () => void;
+  setIsCreating: (isCreating: boolean) => void;
   isEnabled: boolean;
 }
 interface renderDataInterface {
@@ -29,6 +30,7 @@ function ListContainer({
   setLists,
   onPressSwitch,
   isEnabled,
+  setIsCreating,
 }: ListContainerInterface): JSX.Element {
   return (
     <View style={styles.listContainer}>
@@ -59,6 +61,7 @@ function ListContainer({
                 newLists.splice(newLists.indexOf(item), 1);
                 setLists(newLists);
               }
+              setIsCreating(false);
             }}
             isEnabled={isEnabled}
           />

@@ -40,6 +40,7 @@ export default function HomeScreen({
   const [title, setTitle] = useState<string>('Mes listes');
   const [myLists, setMyLists] = useState<ListInterface[]>([]);
   const [sharedLists, setSharedLists] = useState<ListInterface[]>([]);
+  const [isCreating, setIsCreating] = useState<boolean>(false);
 
   const ownerId = '1234id';
   const ownerFirstName = 'Rémi';
@@ -63,6 +64,7 @@ export default function HomeScreen({
   };
 
   const onPressCreateList = () => {
+    setIsCreating(true);
     setIsEnabled(false);
     setMyLists([
       {
@@ -88,12 +90,17 @@ export default function HomeScreen({
             setLists={isEnabled ? setSharedLists : setMyLists}
             onPressSwitch={onPressSwitch}
             isEnabled={isEnabled}
+            setIsCreating={setIsCreating}
           />
-          <NewListButton
-            style={{ color: Colors.WHITE }}
-            title="Créer une liste"
-            onPressCreateList={onPressCreateList}
-          />
+          {isCreating ? (
+            <></>
+          ) : (
+            <NewListButton
+              style={{ color: Colors.WHITE }}
+              title="Créer une liste"
+              onPressCreateList={onPressCreateList}
+            />
+          )}
         </>
       ) : (
         <></>
