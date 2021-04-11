@@ -3,6 +3,7 @@ export const SECONDARY = '#767676';
 export const WHITE = '#FFFFFF';
 export const BLACK = '#000000';
 export const BLACK_60 = 'rgba(0,0,0,0.6)';
+export const BLACK_80 = 'rgba(0,0,0,0.8)';
 
 // ACTIONS
 export const SUCCESS = '#3adb76';
