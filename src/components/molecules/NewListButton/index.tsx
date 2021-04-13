@@ -7,6 +7,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 interface NewListButtonInterface {
   title: string;
   style: TextStyle;
+  onPressCreateList: () => void;
 }
 const styles = StyleSheet.create({
   button: {
@@ -17,9 +18,13 @@ const styles = StyleSheet.create({
   },
 });
 
-function NewListButton({ title, style }: NewListButtonInterface): JSX.Element {
+function NewListButton({
+  title,
+  style,
+  onPressCreateList,
+}: NewListButtonInterface): JSX.Element {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => onPressCreateList()}>
       <View style={styles.button}>
         <Title20 title={title} style={style} />
       </View>
