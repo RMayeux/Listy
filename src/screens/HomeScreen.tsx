@@ -5,6 +5,7 @@ import { Header, NewListButton } from '_molecules';
 import { StackScreenProps } from '@react-navigation/stack';
 import { ListContainer } from '_organisms';
 import { searchList } from '_services';
+import uuid from 'react-native-uuid';
 import { RootStackParamList } from '../../types';
 
 const styles = StyleSheet.create({
@@ -35,12 +36,16 @@ export default function HomeScreen({
   route,
 }: StackScreenProps<RootStackParamList, 'Home'>): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
-  const [isEnabled, setIsEnabled] = useState<boolean>(false);
+  const [isSwitchPushed, setIsSwitchPushed] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('Mes listes');
   const [myLists, setMyLists] = useState<ListInterface[]>([]);
   const [sharedLists, setSharedLists] = useState<ListInterface[]>([]);
+  const [isCreating, setIsCreating] = useState<boolean>(false);
+  const [isCreated, setIsCreated] = useState<boolean>(true);
 
   const ownerId = '1234id';
+  const ownerFirstName = 'Rémi';
+  const ownerLastName = 'Mayeux';
 
   useEffect(() => {
     searchList().then((results: ListInterface[]) => {
@@ -50,13 +55,35 @@ export default function HomeScreen({
     });
   }, []);
 
-  const onPressSwitch = () => {
-    setIsEnabled(!isEnabled);
-    if (isEnabled) {
-      setTitle('Mes listes');
-    } else {
-      setTitle('Liste partagées');
+  const onPressSwitch = (value: number) => {
+    if (isCreated && isCreating) {
+      setIsCreating(false);
     }
+    const valueBoolean = !!value;
+    setIsSwitchPushed(valueBoolean);
+    if (valueBoolean) {
+      setTitle('Liste partagées');
+    } else {
+      setTitle('Mes listes');
+    }
+  };
+
+  const onPressCreateList = () => {
+    setIsCreated(false);
+    setIsCreating(true);
+    setIsSwitchPushed(false);
+    setMyLists([
+      {
+        id: `${uuid.v4()}`,
+        name: '',
+        owner: {
+          firstName: ownerFirstName,
+          id: ownerId,
+          lastName: ownerLastName,
+        },
+      },
+      ...myLists,
+    ]);
   };
 
   return (
@@ -65,15 +92,24 @@ export default function HomeScreen({
         <>
           <Header title={title} />
           <ListContainer
-            lists={isEnabled ? [...sharedLists] : myLists}
-            setLists={isEnabled ? setSharedLists : setMyLists}
+            lists={isSwitchPushed ? [...sharedLists] : myLists}
+            setLists={isSwitchPushed ? setSharedLists : setMyLists}
             onPressSwitch={onPressSwitch}
-            isEnabled={isEnabled}
+            isSwitchPushed={isSwitchPushed}
+            setIsCreating={setIsCreating}
+            isCreating={isCreating}
+            isCreated={isCreated}
+            setIsCreated={setIsCreated}
           />
-          <NewListButton
-            style={{ color: Colors.WHITE }}
-            title="Créer une liste"
-          />
+          {!isCreated ? (
+            <></>
+          ) : (
+            <NewListButton
+              style={{ color: Colors.WHITE }}
+              title="Créer une liste"
+              onPressCreateList={onPressCreateList}
+            />
+          )}
         </>
       ) : (
         <></>
