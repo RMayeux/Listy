@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
 export interface ListInterface {
   id: string;
-  namew: string;
+  name: string;
   owner: OwnerInterface;
   listId?: string;
 }
@@ -36,11 +36,12 @@ export default function HomeScreen({
   route,
 }: StackScreenProps<RootStackParamList, 'Home'>): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
-  const [isEnabled, setIsEnabled] = useState<boolean>(false);
+  const [isSwitchPushed, setIsSwitchPushed] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('Mes listes');
   const [myLists, setMyLists] = useState<ListInterface[]>([]);
   const [sharedLists, setSharedLists] = useState<ListInterface[]>([]);
   const [isCreating, setIsCreating] = useState<boolean>(false);
+  const [isCreated, setIsCreated] = useState<boolean>(true);
 
   const ownerId = '1234id';
   const ownerFirstName = 'Rémi';
@@ -54,18 +55,23 @@ export default function HomeScreen({
     });
   }, []);
 
-  const onPressSwitch = () => {
-    setIsEnabled(!isEnabled);
-    if (isEnabled) {
-      setTitle('Mes listes');
-    } else {
+  const onPressSwitch = (value: number) => {
+    if (isCreated && isCreating) {
+      setIsCreating(false);
+    }
+    const valueBoolean = !!value;
+    setIsSwitchPushed(valueBoolean);
+    if (valueBoolean) {
       setTitle('Liste partagées');
+    } else {
+      setTitle('Mes listes');
     }
   };
 
   const onPressCreateList = () => {
+    setIsCreated(false);
     setIsCreating(true);
-    setIsEnabled(false);
+    setIsSwitchPushed(false);
     setMyLists([
       {
         id: `${uuid.v4()}`,
@@ -86,13 +92,16 @@ export default function HomeScreen({
         <>
           <Header title={title} />
           <ListContainer
-            lists={isEnabled ? [...sharedLists] : myLists}
-            setLists={isEnabled ? setSharedLists : setMyLists}
+            lists={isSwitchPushed ? [...sharedLists] : myLists}
+            setLists={isSwitchPushed ? setSharedLists : setMyLists}
             onPressSwitch={onPressSwitch}
-            isEnabled={isEnabled}
+            isSwitchPushed={isSwitchPushed}
             setIsCreating={setIsCreating}
+            isCreating={isCreating}
+            isCreated={isCreated}
+            setIsCreated={setIsCreated}
           />
-          {isCreating ? (
+          {!isCreated ? (
             <></>
           ) : (
             <NewListButton

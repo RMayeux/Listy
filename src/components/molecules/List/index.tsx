@@ -45,7 +45,7 @@ interface ListComponentInterface {
   style: ViewStyle;
   onSwipe: (args: readonly never[]) => void;
   onEnter: (string: string) => void;
-  isEnabled: boolean;
+  isSwitchPushed: boolean;
 }
 export interface ListInterface {
   id: string;

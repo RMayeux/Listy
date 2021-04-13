@@ -9,13 +9,17 @@ import { ListInterface } from 'screens/HomeScreen';
 interface ListContainerInterface {
   lists: ListInterface[];
   setLists: Dispatch<SetStateAction<ListInterface[]>>;
-  onPressSwitch: () => void;
+  onPressSwitch: (value: number) => void;
   setIsCreating: (isCreating: boolean) => void;
-  isEnabled: boolean;
+  isSwitchPushed: boolean;
+  isCreating: boolean;
+  isCreated: boolean;
+  setIsCreated: (isCreated: boolean) => void;
 }
 interface renderDataInterface {
   item: ListInterface;
 }
+
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
@@ -29,12 +33,19 @@ function ListContainer({
   lists,
   setLists,
   onPressSwitch,
-  isEnabled,
-  setIsCreating,
+  isSwitchPushed,
+  isCreating,
+  setIsCreated,
+  isCreated,
 }: ListContainerInterface): JSX.Element {
   return (
     <View style={styles.listContainer}>
-      <ListSwitch onPress={onPressSwitch} />
+      <ListSwitch
+        onPress={onPressSwitch}
+        isSwitchPushed={isSwitchPushed}
+        isCreating={isCreating}
+        isCreated={isCreated}
+      />
       <FlatList
         contentContainerStyle={{ flex: 1, alignItems: 'center' }}
         data={lists}
@@ -61,9 +72,9 @@ function ListContainer({
                 newLists.splice(newLists.indexOf(item), 1);
                 setLists(newLists);
               }
-              setIsCreating(false);
+              setIsCreated(true);
             }}
-            isEnabled={isEnabled}
+            isSwitchPushed={isSwitchPushed}
           />
         )}
       />
