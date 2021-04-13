@@ -69,6 +69,7 @@ export default function HomeScreen({
             setLists={isEnabled ? setSharedLists : setMyLists}
             onPressSwitch={onPressSwitch}
             isEnabled={isEnabled}
+            navigation={navigation}
           />
           <NewListButton
             style={{ color: Colors.WHITE }}

@@ -29,6 +29,7 @@ function ListContainer({
   setLists,
   onPressSwitch,
   isEnabled,
+  navigation,
 }: ListContainerInterface): JSX.Element {
   return (
     <View style={styles.listContainer}>
