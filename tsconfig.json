@@ -17,7 +17,7 @@
       "_molecules": ["components/molecules"],
       "_organisms": ["components/organisms"],
       "_navigations": ["navigations"],
-      "_scenes": ["scenes"],
+      "_screens": ["screens"],
       "_services": ["services"],
       "_utils": ["utils"],
     }

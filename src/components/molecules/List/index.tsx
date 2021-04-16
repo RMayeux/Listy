@@ -33,6 +33,7 @@ import {
   useValue,
   minus,
 } from 'react-native-redash';
+import { HomeScreenNavigationProp } from '../../../../types';
 
 const { FONT_SIZE_20, FONT_MEDIUM } = Typography;
 const { BLACK_60 } = Colors;
@@ -46,6 +47,7 @@ interface ListComponentInterface {
   onSwipe: (args: readonly never[]) => void;
   onEnter: (string: string) => void;
   isSwitchPushed: boolean;
+  navigation: HomeScreenNavigationProp;
 }
 export interface ListInterface {
   id: string;
@@ -94,6 +96,7 @@ function List({
   onSwipe,
   style,
   onEnter,
+  navigation,
 }: ListComponentInterface): JSX.Element {
   const [name, setName] = useState<string>('');
   const {
@@ -141,7 +144,14 @@ function List({
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <PanGestureHandler {...gestureHandler}>
         <Animated.View style={{ height, transform: [{ translateX }] }}>
-          <TouchableWithoutFeedback style={[styles.list, style]}>
+          <TouchableWithoutFeedback
+            onPress={() =>
+              navigation.navigate('ListScreen', {
+                list,
+              })
+            }
+            style={[styles.list, style]}
+          >
             {list.name ? (
               <ListName name={list.name} style={{ marginBottom: 10 }} />
             ) : (

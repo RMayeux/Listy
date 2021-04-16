@@ -5,6 +5,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import { Colors } from '_styles';
 import { createList, deleteList } from '_services';
 import { ListInterface } from 'screens/HomeScreen';
+import { HomeScreenNavigationProp } from '../../../../types';
 
 interface ListContainerInterface {
   lists: ListInterface[];
@@ -15,6 +16,7 @@ interface ListContainerInterface {
   isCreating: boolean;
   isCreated: boolean;
   setIsCreated: (isCreated: boolean) => void;
+  navigation: HomeScreenNavigationProp;
 }
 interface renderDataInterface {
   item: ListInterface;
@@ -76,6 +78,7 @@ function ListContainer({
               setIsCreated(true);
             }}
             isSwitchPushed={isSwitchPushed}
+            navigation={navigation}
           />
         )}
       />
