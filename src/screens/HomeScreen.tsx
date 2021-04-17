@@ -24,6 +24,7 @@ export interface ListInterface {
   name: string;
   owner: OwnerInterface;
   listId?: string;
+  items: Array<string>;
 }
 interface OwnerInterface {
   id: string;

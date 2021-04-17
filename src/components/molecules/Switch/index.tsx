@@ -30,25 +30,6 @@ function ListSwitch({
     { label: 'Mes listes', value: 0 },
     { label: 'Liste partagées', value: 1 },
   ];
-  // if (isCreating) {
-  //   console.log('???');
-  //   return (
-  //     <SwitchSelector
-  //       disableValueChangeOnPress
-  //       value={isSwitchPushed ? 1 : 0}
-  //       initial={0}
-  //       onPress={value => onPress(value)}
-  //       options={options}
-  //       textColor={Colors.BLACK_60}
-  //       selectedColor={Colors.WHITE}
-  //       buttonColor={Colors.PRIMARY}
-  //       borderColor={Colors.PRIMARY}
-  //       bold
-  //       height={45}
-  //       style={styles.listSwitch}
-  //     />
-  //   );
-  // }
   return (
     <>
       <SwitchSelector

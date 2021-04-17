@@ -4,6 +4,7 @@ export interface ListInterface {
   id: string;
   name: string;
   owner: OwnerInterface;
+  items: Array<string>;
 }
 
 interface OwnerInterface {

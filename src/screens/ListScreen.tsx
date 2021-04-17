@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Typography } from '_styles';
 import { Header } from '_molecules';
 import { StackScreenProps } from '@react-navigation/stack';
+import { ListItemsContainer } from '_organisms';
 import { RootStackParamList } from '../../types';
 
 const styles = StyleSheet.create({
@@ -32,11 +33,17 @@ export default function ListScreen({
   navigation,
   route,
 }: StackScreenProps<RootStackParamList, 'ListScreen'>): JSX.Element {
+  const [items, setItems] = useState<string[]>([]);
   const { list } = route.params;
+
+  useEffect(() => {
+    setItems(list.items);
+  }, [list]);
 
   return (
     <View style={styles.container}>
       <Header title={list.name} />
+      <ListItemsContainer list={list} setItems={setItems} items={items} />
     </View>
   );
 }
