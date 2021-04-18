@@ -1,51 +1,80 @@
 /* eslint-disable react/no-unused-prop-types */
-import { ListItem } from '_molecules';
-import React, { Dispatch, SetStateAction } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { ListItem, ListInput } from '_molecules';
+import React, { useEffect, useState } from 'react';
+import { FlatList, StyleSheet, View, Dimensions } from 'react-native';
 import { Colors } from '_styles';
-import { createList, deleteList } from '_services';
 import { ListInterface } from 'screens/HomeScreen';
-import { identityMatrix4 } from 'react-native-redash';
+import { ListItemInterface } from '../../../../types';
+
+const { height } = Dimensions.get('window');
 
 interface ListItemsContainerInterface {
   list: ListInterface;
-  setItems: (items: string[]) => void;
-  items: Array<string>;
+  setItems: (items: ListItemInterface[]) => void;
+  items: ListItemInterface[];
 }
 
 interface renderDataInterface {
-  item: string;
+  item: ListItemInterface;
 }
 
 const styles = StyleSheet.create({
   listContainer: {
-    flex: 1,
     backgroundColor: Colors.GRAY_LIGHT,
+    maxHeight: height - 160,
   },
 });
 
 function ListItemsContainer({
-  list,
   setItems,
   items,
 }: ListItemsContainerInterface): JSX.Element {
-  return (
-    <View style={styles.listContainer}>
+  const [enabledItems, setEnabledItems] = useState<ListItemInterface[]>([]);
+  const [disabledItems, setDisabledItems] = useState<ListItemInterface[]>([]);
+
+  useEffect(() => {
+    setEnabledItems(items.filter((item: ListItemInterface) => item.enabled));
+    setDisabledItems(items.filter((item: ListItemInterface) => !item.enabled));
+  }, [items]);
+  const ListItemRendering = (data: ListItemInterface[]) => {
+    return (
       <FlatList
-        contentContainerStyle={{ flex: 1, width: '100%' }}
-        data={items}
+        contentContainerStyle={{ width: '100%' }}
+        data={data}
         renderItem={({ item }: renderDataInterface) => (
           <ListItem
-            itemName={item}
+            itemName={item.name}
+            enabled={item.enabled}
             onDelete={async () => {
               const newItems = [...items];
               newItems.splice(newItems.indexOf(item), 1);
+              setItems(newItems);
+            }}
+            onPress={async (newItem: ListItemInterface) => {
+              const newItems = [...items];
+              const index = newItems.indexOf(item);
+              newItems.splice(index, 1);
+              newItems.push(newItem);
+              // await createList(newItems[newItems.indexOf(item)]);
               setItems(newItems);
             }}
           />
         )}
         keyExtractor={(item, index) => index.toString()}
       />
+    );
+  };
+  return (
+    <View style={styles.listContainer}>
+      <ListInput
+        onEnter={async (name: string) => {
+          const newItems = [...items];
+          newItems.push({ name, enabled: true });
+          // await createList(newItems[newItems.indexOf(item)]);
+          setItems(newItems);
+        }}
+      />
+      {ListItemRendering([...enabledItems, ...disabledItems])}
     </View>
   );
 }

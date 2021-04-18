@@ -35,7 +35,7 @@ import {
 } from 'react-native-redash';
 import { HomeScreenNavigationProp } from '../../../../types';
 
-const { FONT_SIZE_20, FONT_MEDIUM } = Typography;
+const { FONT_SIZE_20, FONT_MEDIUM, FONT_SIZE_18, FONT_REGULAR } = Typography;
 const { BLACK_60 } = Colors;
 
 const { width } = Dimensions.get('window');
@@ -65,7 +65,6 @@ interface OwnerInterface {
 
 const styles = StyleSheet.create({
   list: {
-    padding: 10,
     paddingBottom: 0,
     minWidth: '100%',
     backgroundColor: Colors.WHITE,
@@ -154,9 +153,10 @@ function List({
             style={[styles.list, style]}
           >
             {list.name ? (
-              <ListName name={list.name} style={{ marginBottom: 10 }} />
+              <ListName name={list.name} style={{ marginLeft: 10 }} />
             ) : (
               <TextInput
+                autoFocus
                 onChangeText={text => setName(text)}
                 onBlur={() => {
                   onEnter(name);
@@ -164,11 +164,11 @@ function List({
                 style={{
                   fontSize: FONT_SIZE_20,
                   color: BLACK_60,
-                  ...FONT_MEDIUM,
-                  paddingBottom: 2,
-                  borderBottomWidth: 1,
-                  borderBottomColor: Colors.PRIMARY,
-                  width: '50%',
+                  ...FONT_REGULAR,
+                  justifyContent: 'flex-end',
+                  alignItems: 'flex-end',
+                  height: '100%',
+                  marginLeft: 10,
                 }}
               />
             )}

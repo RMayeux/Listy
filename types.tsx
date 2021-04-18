@@ -24,3 +24,8 @@ export type HomeScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Home'
 >;
+
+export interface ListItemInterface {
+  name: string;
+  enabled: boolean;
+}

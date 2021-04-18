@@ -1,11 +1,13 @@
 /* eslint-disable react/no-unused-prop-types */
 import { List, ListSwitch } from '_molecules';
 import React, { Dispatch, SetStateAction } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View, Dimensions } from 'react-native';
 import { Colors } from '_styles';
 import { createList, deleteList } from '_services';
 import { ListInterface } from 'screens/HomeScreen';
 import { HomeScreenNavigationProp } from '../../../../types';
+
+const { height } = Dimensions.get('window');
 
 interface ListContainerInterface {
   lists: ListInterface[];
@@ -28,6 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.GRAY_LIGHT,
     paddingTop: 25,
+    height: height - 160,
   },
 });
 

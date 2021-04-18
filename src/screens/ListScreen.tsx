@@ -4,7 +4,7 @@ import { Typography } from '_styles';
 import { Header } from '_molecules';
 import { StackScreenProps } from '@react-navigation/stack';
 import { ListItemsContainer } from '_organisms';
-import { RootStackParamList } from '../../types';
+import { ListItemInterface, RootStackParamList } from '../../types';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,6 +22,7 @@ export interface ListInterface {
   name: string;
   owner: OwnerInterface;
   listId?: string;
+  items: ListItemInterface;
 }
 interface OwnerInterface {
   id: string;
@@ -37,7 +38,10 @@ export default function ListScreen({
   const { list } = route.params;
 
   useEffect(() => {
-    setItems(list.items);
+    setItems([
+      ...list.items.filter((item: ListItemInterface) => item.enabled),
+      ...list.items.filter((item: ListItemInterface) => !item.enabled),
+    ]);
   }, [list]);
 
   return (
