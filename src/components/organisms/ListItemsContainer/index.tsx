@@ -2,7 +2,6 @@
 import { ListItem, ListInput } from '_molecules';
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View, Dimensions } from 'react-native';
-import { Colors } from '_styles';
 import { ListInterface } from 'screens/HomeScreen';
 import { ListItemInterface } from '../../../../types';
 
@@ -20,8 +19,9 @@ interface renderDataInterface {
 
 const styles = StyleSheet.create({
   listContainer: {
-    backgroundColor: Colors.GRAY_LIGHT,
+    minHeight: height - 160,
     maxHeight: height - 160,
+    position: 'relative',
   },
 });
 
@@ -34,12 +34,13 @@ function ListItemsContainer({
 
   useEffect(() => {
     setEnabledItems(items.filter((item: ListItemInterface) => item.enabled));
-    setDisabledItems(items.filter((item: ListItemInterface) => !item.enabled));
+    const disabled = items.filter((item: ListItemInterface) => !item.enabled);
+    setDisabledItems(disabled.reverse());
   }, [items]);
   const ListItemRendering = (data: ListItemInterface[]) => {
     return (
       <FlatList
-        contentContainerStyle={{ width: '100%' }}
+        contentContainerStyle={{ width: '100%', overflow: 'scroll' }}
         data={data}
         renderItem={({ item }: renderDataInterface) => (
           <ListItem

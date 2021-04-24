@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Typography } from '_styles';
-import { Header } from '_molecules';
+import { Header, ShareButton } from '_molecules';
 import { StackScreenProps } from '@react-navigation/stack';
 import { ListItemsContainer } from '_organisms';
 import { ListItemInterface, RootStackParamList } from '../../types';
@@ -36,7 +36,6 @@ export default function ListScreen({
 }: StackScreenProps<RootStackParamList, 'ListScreen'>): JSX.Element {
   const [items, setItems] = useState<string[]>([]);
   const { list } = route.params;
-
   useEffect(() => {
     setItems([
       ...list.items.filter((item: ListItemInterface) => item.enabled),
@@ -46,8 +45,9 @@ export default function ListScreen({
 
   return (
     <View style={styles.container}>
-      <Header title={list.name} />
+      <Header title={list.name} goBack={navigation.goBack} />
       <ListItemsContainer list={list} setItems={setItems} items={items} />
+      <ShareButton onPress={() => console.log('lul')} />
     </View>
   );
 }

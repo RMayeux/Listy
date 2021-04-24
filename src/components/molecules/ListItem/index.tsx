@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { Colors, Typography } from '_styles';
 import { Ionicons } from '@expo/vector-icons';
-import {
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-} from 'react-native-gesture-handler';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { ListItemInterface } from '../../../../types';
 
 interface ListSwitchInterface {
@@ -14,6 +11,7 @@ interface ListSwitchInterface {
   onPress: (newItem: ListItemInterface) => void;
   enabled: boolean;
 }
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   listItem: {
@@ -29,7 +27,8 @@ const styles = StyleSheet.create({
   listName: {
     color: Colors.BLACK_60,
     fontSize: Typography.FONT_SIZE_18,
-    ...Typography.FONT_MEDIUM,
+    ...Typography.FONT_REGULAR,
+    width: width - 25,
   },
   icon: {
     margin: 5,
@@ -41,7 +40,11 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   disabled: {
-    opacity: 0.8,
+    backgroundColor: Colors.PRIMARY,
+    opacity: 0.4,
+  },
+  textDisabled: {
+    color: Colors.BLACK_60,
   },
 });
 
@@ -51,7 +54,6 @@ function ListItem({
   onDelete,
   onPress,
 }: ListSwitchInterface): JSX.Element {
-  const [isBeingEdited, setIsBeingEdited] = useState<boolean>();
   const [name, setName] = useState<string>('');
 
   useEffect(() => {
@@ -59,21 +61,23 @@ function ListItem({
   }, [itemName]);
 
   return (
-    <TouchableWithoutFeedback
+    <View
       style={enabled ? styles.listItem : [styles.listItem, styles.disabled]}
-      onPress={() => {
-        if (!isBeingEdited) {
-          onPress({ name, enabled: !enabled });
-        }
-      }}
     >
-      <View>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          onPress({ name, enabled: !enabled });
+        }}
+        style={{ height: '100%', justifyContent: 'center' }}
+      >
         <Text
-          style={enabled ? styles.listName : [styles.listName, styles.disabled]}
+          style={
+            enabled ? styles.listName : [styles.listName, styles.textDisabled]
+          }
         >
           {itemName}
         </Text>
-      </View>
+      </TouchableWithoutFeedback>
       <View
         style={{
           position: 'absolute',
@@ -82,16 +86,19 @@ function ListItem({
           marginRight: 15,
         }}
       >
-        <TouchableWithoutFeedback onPress={() => onDelete()}>
+        <TouchableWithoutFeedback
+          style={{ width: 50 }}
+          onPress={() => onDelete()}
+        >
           <Ionicons
             name="md-trash-bin-outline"
             size={20}
-            color={Colors.PRIMARY}
-            style={enabled ? styles.icon : [styles.icon, styles.disabled]}
+            color={enabled ? Colors.PRIMARY : Colors.BLACK_60}
+            style={enabled ? styles.icon : [styles.icon]}
           />
         </TouchableWithoutFeedback>
       </View>
-    </TouchableWithoutFeedback>
+    </View>
   );
 }
 

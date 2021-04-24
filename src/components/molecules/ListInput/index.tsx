@@ -40,7 +40,6 @@ function ListItem({ onEnter }: ListInputInterface): JSX.Element {
       }}
     >
       <TextInput
-        autoFocus
         ref={inputRef}
         value={name}
         onChangeText={text => {
