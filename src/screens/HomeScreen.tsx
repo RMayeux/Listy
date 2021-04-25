@@ -6,7 +6,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { ListContainer } from '_organisms';
 import { searchList } from '_services';
 import uuid from 'react-native-uuid';
-import { RootStackParamList } from '../../types';
+import { ListItemInterface, RootStackParamList } from '../../types';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,6 +24,7 @@ export interface ListInterface {
   name: string;
   owner: OwnerInterface;
   listId?: string;
+  items: ListItemInterface;
 }
 interface OwnerInterface {
   id: string;
@@ -81,6 +82,7 @@ export default function HomeScreen({
           id: ownerId,
           lastName: ownerLastName,
         },
+        items: [],
       },
       ...myLists,
     ]);
@@ -100,9 +102,16 @@ export default function HomeScreen({
             isCreating={isCreating}
             isCreated={isCreated}
             setIsCreated={setIsCreated}
+            navigation={navigation}
           />
           {!isCreated ? (
-            <></>
+            <View
+              style={{
+                height: 50,
+                backgroundColor: Colors.GRAY_LIGHT,
+                width: '100%',
+              }}
+            />
           ) : (
             <NewListButton
               style={{ color: Colors.WHITE }}

@@ -12,7 +12,9 @@ interface ListSwitchInterface {
 
 const styles = StyleSheet.create({
   listSwitch: {
+    height: 45,
     width: '60%',
+    marginTop: 25,
     marginBottom: 25,
     elevation: 4,
     backgroundColor: '#ffffff',
@@ -30,25 +32,6 @@ function ListSwitch({
     { label: 'Mes listes', value: 0 },
     { label: 'Liste partagées', value: 1 },
   ];
-  // if (isCreating) {
-  //   console.log('???');
-  //   return (
-  //     <SwitchSelector
-  //       disableValueChangeOnPress
-  //       value={isSwitchPushed ? 1 : 0}
-  //       initial={0}
-  //       onPress={value => onPress(value)}
-  //       options={options}
-  //       textColor={Colors.BLACK_60}
-  //       selectedColor={Colors.WHITE}
-  //       buttonColor={Colors.PRIMARY}
-  //       borderColor={Colors.PRIMARY}
-  //       bold
-  //       height={45}
-  //       style={styles.listSwitch}
-  //     />
-  //   );
-  // }
   return (
     <>
       <SwitchSelector

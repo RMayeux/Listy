@@ -6,7 +6,7 @@ import {
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { ColorSchemeName } from 'react-native';
-
+import ListScreen from '../screens/ListScreen';
 import { RootStackParamList } from '../../types';
 import HomeScreen from '../screens/HomeScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
@@ -25,6 +25,7 @@ function RootNavigator() {
       }}
     >
       <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="ListScreen" component={ListScreen} />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}

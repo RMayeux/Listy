@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { ListName, ListAction } from '_atoms';
 import React, { useState } from 'react';
 import {
@@ -33,8 +34,9 @@ import {
   useValue,
   minus,
 } from 'react-native-redash';
+import { HomeScreenNavigationProp } from '../../../../types';
 
-const { FONT_SIZE_20, FONT_MEDIUM } = Typography;
+const { FONT_SIZE_20, FONT_REGULAR } = Typography;
 const { BLACK_60 } = Colors;
 
 const { width } = Dimensions.get('window');
@@ -46,12 +48,14 @@ interface ListComponentInterface {
   onSwipe: (args: readonly never[]) => void;
   onEnter: (string: string) => void;
   isSwitchPushed: boolean;
+  navigation: HomeScreenNavigationProp;
 }
 export interface ListInterface {
   id: string;
   name: string;
   owner: OwnerInterface;
   listId?: string;
+  items: Array<string>;
 }
 
 interface OwnerInterface {
@@ -62,7 +66,6 @@ interface OwnerInterface {
 
 const styles = StyleSheet.create({
   list: {
-    padding: 10,
     paddingBottom: 0,
     minWidth: '100%',
     backgroundColor: Colors.WHITE,
@@ -94,6 +97,7 @@ function List({
   onSwipe,
   style,
   onEnter,
+  navigation,
 }: ListComponentInterface): JSX.Element {
   const [name, setName] = useState<string>('');
   const {
@@ -138,14 +142,25 @@ function List({
           <ListAction x={abs(translateX)} {...{ deleteOpacity }} />
         </TouchableWithoutFeedback>
       </View>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <PanGestureHandler {...gestureHandler}>
+      <PanGestureHandler
+        failOffsetY={[-5, 5]}
+        activeOffsetX={[-5, 5]}
+        {...gestureHandler}
+      >
         <Animated.View style={{ height, transform: [{ translateX }] }}>
-          <TouchableWithoutFeedback style={[styles.list, style]}>
+          <TouchableWithoutFeedback
+            onPress={() =>
+              navigation.navigate('ListScreen', {
+                list,
+              })
+            }
+            style={[styles.list, style]}
+          >
             {list.name ? (
-              <ListName name={list.name} style={{ marginBottom: 10 }} />
+              <ListName name={list.name} style={{ marginLeft: 10 }} />
             ) : (
               <TextInput
+                autoFocus
                 onChangeText={text => setName(text)}
                 onBlur={() => {
                   onEnter(name);
@@ -153,11 +168,11 @@ function List({
                 style={{
                   fontSize: FONT_SIZE_20,
                   color: BLACK_60,
-                  ...FONT_MEDIUM,
-                  paddingBottom: 2,
-                  borderBottomWidth: 1,
-                  borderBottomColor: Colors.PRIMARY,
-                  width: '50%',
+                  ...FONT_REGULAR,
+                  justifyContent: 'flex-end',
+                  alignItems: 'flex-end',
+                  height: '100%',
+                  marginLeft: 10,
                 }}
               />
             )}

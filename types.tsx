@@ -1,8 +1,10 @@
+import { StackNavigationProp } from '@react-navigation/stack';
+
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
   Home: undefined;
-  CreateList: undefined;
+  ListScreen: undefined;
 };
 
 export type BottomTabParamList = {
@@ -17,3 +19,13 @@ export type TabOneParamList = {
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
 };
+
+export type HomeScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Home'
+>;
+
+export interface ListItemInterface {
+  name: string;
+  enabled: boolean;
+}
