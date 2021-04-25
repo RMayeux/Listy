@@ -12,7 +12,9 @@ interface ListSwitchInterface {
 
 const styles = StyleSheet.create({
   listSwitch: {
+    height: 45,
     width: '60%',
+    marginTop: 25,
     marginBottom: 25,
     elevation: 4,
     backgroundColor: '#ffffff',

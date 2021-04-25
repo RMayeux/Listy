@@ -26,11 +26,12 @@ interface renderDataInterface {
 
 const styles = StyleSheet.create({
   listContainer: {
-    flex: 1,
     alignItems: 'center',
     backgroundColor: Colors.GRAY_LIGHT,
-    paddingTop: 25,
     height: height - 160,
+    minHeight: height - 160,
+    maxHeight: height - 160,
+    position: 'relative',
   },
 });
 
@@ -53,8 +54,13 @@ function ListContainer({
         isCreated={isCreated}
       />
       <FlatList
-        contentContainerStyle={{ flex: 1, alignItems: 'center' }}
+        style={{
+          width: '100%',
+          overflow: 'scroll',
+          maxHeight: height - 255,
+        }}
         data={lists}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }: renderDataInterface) => (
           <List
             list={item}

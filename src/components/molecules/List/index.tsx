@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { ListName, ListAction } from '_atoms';
 import React, { useState } from 'react';
 import {
@@ -35,7 +36,7 @@ import {
 } from 'react-native-redash';
 import { HomeScreenNavigationProp } from '../../../../types';
 
-const { FONT_SIZE_20, FONT_MEDIUM, FONT_SIZE_18, FONT_REGULAR } = Typography;
+const { FONT_SIZE_20, FONT_REGULAR } = Typography;
 const { BLACK_60 } = Colors;
 
 const { width } = Dimensions.get('window');
@@ -141,8 +142,11 @@ function List({
           <ListAction x={abs(translateX)} {...{ deleteOpacity }} />
         </TouchableWithoutFeedback>
       </View>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <PanGestureHandler {...gestureHandler}>
+      <PanGestureHandler
+        failOffsetY={[-5, 5]}
+        activeOffsetX={[-5, 5]}
+        {...gestureHandler}
+      >
         <Animated.View style={{ height, transform: [{ translateX }] }}>
           <TouchableWithoutFeedback
             onPress={() =>

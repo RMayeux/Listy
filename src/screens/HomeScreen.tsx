@@ -105,7 +105,13 @@ export default function HomeScreen({
             navigation={navigation}
           />
           {!isCreated ? (
-            <></>
+            <View
+              style={{
+                height: 50,
+                backgroundColor: Colors.GRAY_LIGHT,
+                width: '100%',
+              }}
+            />
           ) : (
             <NewListButton
               style={{ color: Colors.WHITE }}

@@ -19,6 +19,7 @@ interface renderDataInterface {
 
 const styles = StyleSheet.create({
   listContainer: {
+    height: height - 160,
     minHeight: height - 160,
     maxHeight: height - 160,
     position: 'relative',

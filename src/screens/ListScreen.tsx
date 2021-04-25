@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { Typography } from '_styles';
 import { Header, ShareButton } from '_molecules';
 import { StackScreenProps } from '@react-navigation/stack';
-import { ListItemsContainer } from '_organisms';
+import { ListItemsContainer, ShareModal } from '_organisms';
 import { ListItemInterface, RootStackParamList } from '../../types';
 
 const styles = StyleSheet.create({
@@ -35,6 +35,7 @@ export default function ListScreen({
   route,
 }: StackScreenProps<RootStackParamList, 'ListScreen'>): JSX.Element {
   const [items, setItems] = useState<string[]>([]);
+  const [isSharing, setIsSharing] = useState<boolean>(false);
   const { list } = route.params;
   useEffect(() => {
     setItems([
@@ -47,7 +48,11 @@ export default function ListScreen({
     <View style={styles.container}>
       <Header title={list.name} goBack={navigation.goBack} />
       <ListItemsContainer list={list} setItems={setItems} items={items} />
-      <ShareButton onPress={() => console.log('lul')} />
+      {isSharing ? (
+        <ShareModal onEnter={() => setIsSharing(false)} />
+      ) : (
+        <ShareButton onPress={() => setIsSharing(true)} />
+      )}
     </View>
   );
 }
